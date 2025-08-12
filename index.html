@@ -27,6 +27,7 @@
             background-color: var(--light);
             color: var(--secondary);
             line-height: 1.6;
+            overflow-x: hidden;
         }
         
         .container {
@@ -175,6 +176,86 @@
             border: none;
             cursor: pointer;
             color: var(--secondary);
+            z-index: 1001;
+        }
+        
+        /* Mobile Side Menu */
+        .mobile-side-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+            z-index: 1002;
+            transition: var(--transition);
+            padding: 80px 30px 30px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .mobile-side-menu.active {
+            right: 0;
+        }
+        
+        .mobile-side-menu ul {
+            list-style: none;
+        }
+        
+        .mobile-side-menu ul li {
+            margin-bottom: 20px;
+        }
+        
+        .mobile-side-menu ul li a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            font-weight: 500;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        
+        .mobile-side-menu ul li a:hover {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+        }
+        
+        .mobile-menu-close {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--secondary);
+            transition: var(--transition);
+        }
+        
+        .mobile-menu-close:hover {
+            color: var(--primary);
+            transform: rotate(90deg);
+        }
+        
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
         
         /* Hero Section */
@@ -741,6 +822,23 @@
         </div>
     </header>
 
+    <!-- Mobile Side Menu -->
+    <div class="mobile-side-menu">
+        <button class="mobile-menu-close">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+    
+    <!-- Menu Overlay -->
+    <div class="menu-overlay"></div>
+
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container hero-content">
@@ -767,7 +865,7 @@
             </div>
             <div class="about-content">
                 <div class="about-image">
-                    <img src="https://media.licdn.com/dms/image/v2/D4D03AQF4XQpslZysBg/profile-displayphoto-shrink_200_200/B4DZTxhFd4GcAY-/0/1739218775026?e=1756944000&v=beta&t=JFTXCmXu-dYR3m81i0Af6WXpj68UZEVKyHPn7PJrusA" alt="Alex Morgan">
+                    <img src="profilepic.png" alt="profile">
                 </div>
                 <div class="about-text">
                     <h3>Front-End & Back-End Developer</h3>
@@ -786,7 +884,7 @@
                         </div>
                         <div class="skill-item">
                             <div class="skill-header">
-                                <span>JavaScript</span>
+                                <span>JavaScript (Frameworks)</span>
                                 <span>90%</span>
                             </div>
                             <div class="skill-bar">
@@ -887,23 +985,11 @@
                 <button class="filter-btn" data-filter="ecommerce">E-Commerce</button>
                 <button class="filter-btn" data-filter="app">Web App</button>
             </div>
-            
+
+
             <div class="portfolio-grid">
-                <div class="portfolio-item" data-category="web">
-                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=600&h=400&q=80" alt="Project 1" class="portfolio-img">
-                    <div class="portfolio-overlay">
-                        <h3>Corporate Website</h3>
-                        <p>Modern business website with CMS integration</p>
-                        <div class="portfolio-tags">
-                            <span class="portfolio-tag">HTML</span>
-                            <span class="portfolio-tag">CSS</span>
-                            <span class="portfolio-tag">JavaScript</span>
-                        </div>
-                    </div>
-                </div>
-                
                 <div class="portfolio-item" data-category="ecommerce">
-                    <img src="https://images.unsplash.com/photo-1607082350899-7e105aa886ae?auto=format&fit=crop&w=600&h=400&q=80" alt="Project 2" class="portfolio-img">
+                    <img src="ALucenza-browse.png" alt="Project 2" class="portfolio-img">
                     <div class="portfolio-overlay">
                         <h3>Online Store</h3>
                         <p>E-commerce platform with secure checkout</p>
@@ -914,55 +1000,32 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="portfolio-item" data-category="app">
-                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&h=400&q=80" alt="Project 3" class="portfolio-img">
-                    <div class="portfolio-overlay">
-                        <h3>Task Management App</h3>
-                        <p>Web application for team collaboration</p>
-                        <div class="portfolio-tags">
-                            <span class="portfolio-tag">JavaScript</span>
-                            <span class="portfolio-tag">PHP</span>
-                            <span class="portfolio-tag">API</span>
-                        </div>
-                    </div>
-                </div>
-                
+
                 <div class="portfolio-item" data-category="web">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&h=400&q=80" alt="Project 4" class="portfolio-img">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=600&h=400&q=80" alt="Project 1" class="portfolio-img">
                     <div class="portfolio-overlay">
-                        <h3>Restaurant Website</h3>
-                        <p>Responsive website with online reservation</p>
+                        <h3>Corporate Website</h3>
+                        <p>Worked as a junior software developer
+                            on websites for employment agencies, ski bookings
+                            and more</p>
                         <div class="portfolio-tags">
                             <span class="portfolio-tag">HTML</span>
                             <span class="portfolio-tag">CSS</span>
-                            <span class="portfolio-tag">PHP</span>
+                            <span class="portfolio-tag">JavaScript</span>
                         </div>
                     </div>
                 </div>
+                
                 
                 <div class="portfolio-item" data-category="ecommerce">
                     <img src="https://images.unsplash.com/photo-1600267175161-cfaa711b4a81?auto=format&fit=crop&w=600&h=400&q=80" alt="Project 5" class="portfolio-img">
                     <div class="portfolio-overlay">
-                        <h3>Fashion Store</h3>
-                        <p>E-commerce site with product filtering</p>
+                        <h3>Election portal</h3>
+                        <p>Worked as a developer making applications for elections</p>
                         <div class="portfolio-tags">
                             <span class="portfolio-tag">JavaScript</span>
                             <span class="portfolio-tag">PHP</span>
                             <span class="portfolio-tag">MySQL</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item" data-category="app">
-                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=600&h=400&q=80" alt="Project 6" class="portfolio-img">
-                    <div class="portfolio-overlay">
-                        <h3>Analytics Dashboard</h3>
-                        <p>Data visualization platform for businesses</p>
-                        <div class="portfolio-tags">
-                            <span class="portfolio-tag">JavaScript</span>
-                            <span class="portfolio-tag">API</span>
-                            <span class="portfolio-tag">PHP</span>
                         </div>
                     </div>
                 </div>
@@ -1051,11 +1114,7 @@
                     <h3>Bryan de Vuono</h3>
                     <p>Freelance web developer specializing in creating responsive, user-friendly websites and applications using modern web technologies.</p>
                     <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="https://github.com/bryandevuono" class="social-link"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
                 
@@ -1088,10 +1147,26 @@
     <script>
         // Mobile Menu Toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenuClose = document.querySelector('.mobile-menu-close');
+        const mobileSideMenu = document.querySelector('.mobile-side-menu');
+        const menuOverlay = document.querySelector('.menu-overlay');
         const navMenu = document.querySelector('nav ul');
         
-        mobileMenuBtn.addEventListener('click', () => {
-            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        function toggleMobileMenu() {
+            mobileSideMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            document.body.classList.toggle('no-scroll');
+        }
+        
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        mobileMenuClose.addEventListener('click', toggleMobileMenu);
+        menuOverlay.addEventListener('click', toggleMobileMenu);
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.mobile-side-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMobileMenu();
+            });
         });
         
         // Portfolio Filtering
@@ -1145,8 +1220,8 @@
                     });
                     
                     // Close mobile menu if open
-                    if (window.innerWidth < 768) {
-                        navMenu.style.display = 'none';
+                    if (mobileSideMenu.classList.contains('active')) {
+                        toggleMobileMenu();
                     }
                 }
             });
